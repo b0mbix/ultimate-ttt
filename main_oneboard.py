@@ -1,5 +1,5 @@
 from PySide2.QtWidgets import QApplication, QMainWindow
-from ui_oneboard import Ui_MainWindow
+from ui_oneboard_responsible import Ui_MainWindow
 from boards import Board
 import sys
 
