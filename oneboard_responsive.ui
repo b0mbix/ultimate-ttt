@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>474</width>
-    <height>679</height>
+    <height>743</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,192 +17,6 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="2" column="0">
      <widget class="QPushButton" name="square_10">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>100</horstretch>
-        <verstretch>100</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>500</width>
-        <height>500</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>72</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">squares</string>
-      </attribute>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="square_01">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>100</horstretch>
-        <verstretch>100</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>500</width>
-        <height>500</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>72</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">squares</string>
-      </attribute>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="square_20">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>100</horstretch>
-        <verstretch>100</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>500</width>
-        <height>500</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>72</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">squares</string>
-      </attribute>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QPushButton" name="square_12">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>100</horstretch>
-        <verstretch>100</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>500</width>
-        <height>500</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>72</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">squares</string>
-      </attribute>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="3">
-     <widget class="QLabel" name="move_label">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>70</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>36</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Move: X</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="square_00">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>100</horstretch>
-        <verstretch>100</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>100</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>500</width>
-        <height>500</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>72</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <attribute name="buttonGroup">
-       <string notr="true">squares</string>
-      </attribute>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="square_21">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>100</horstretch>
@@ -300,27 +114,6 @@
       </attribute>
      </widget>
     </item>
-    <item row="0" column="0" colspan="3">
-     <widget class="QLabel" name="title">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>70</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>48</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Tic-Tac-Toe</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="2">
      <widget class="QPushButton" name="square_22">
       <property name="sizePolicy">
@@ -352,6 +145,225 @@
       <attribute name="buttonGroup">
        <string notr="true">squares</string>
       </attribute>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="square_00">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>100</horstretch>
+        <verstretch>100</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>72</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">squares</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="3">
+     <widget class="QLabel" name="move_label">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>70</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>36</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Move: X</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QLabel" name="title">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>70</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>48</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tic-Tac-Toe</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="square_01">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>100</horstretch>
+        <verstretch>100</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>72</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">squares</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="square_20">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>100</horstretch>
+        <verstretch>100</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>72</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">squares</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="square_21">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>100</horstretch>
+        <verstretch>100</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>72</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">squares</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="square_12">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>100</horstretch>
+        <verstretch>100</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>72</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <attribute name="buttonGroup">
+       <string notr="true">squares</string>
+      </attribute>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="3">
+     <widget class="QPushButton" name="reset">
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>RESTART</string>
+      </property>
      </widget>
     </item>
    </layout>

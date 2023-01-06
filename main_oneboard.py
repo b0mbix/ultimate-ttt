@@ -9,12 +9,17 @@ class oneBoardWindow(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.game = Board()
-        self.players = ["X", "O"]
-        self.ui.squares.buttonClicked.connect(self._squareClicked)
+        self.ui.reset.clicked.connect(self._reset_clicked)
+        self.ui.squares.buttonClicked.connect(self._square_clicked)
+        self._reset_clicked()
         self._set_move_text()
 
-    def _squareClicked(self, button):
+    def _reset_clicked(self):
+        self.ui.retranslateUi(self)
+        self.game = Board()
+        self.players = ["X", "O"]
+
+    def _square_clicked(self, button):
         x = int(button.objectName()[7])
         y = int(button.objectName()[8])
         to_reverse = 0 if self.game.fields[x][y] else 1
