@@ -37,7 +37,7 @@ class Board:
 
     def check_winner(self):
         def winner_state(fields):
-            if len(set(fields)) == 1 and None not in fields:
+            if len(set(fields)) == 1 and (None, "tie") not in fields:
                 self._active = False
                 return True
             return False
@@ -70,8 +70,46 @@ class Board:
 
 
 class BigBoard(Board):
-    pass
+    def __init__(self, size=3):
+        super().__init__(size)
+        self._small_boards = []
+        self._active_small = []
+        for i in range(size):
+            self._small_boards.append([])
+            self._active_small.append([])
+            for _ in range(size):
+                self._small_boards[i].append(SmallBoard(self, size))
+                self._small_active[i].append(True)
+
+    def make_move(self, board_x, board_y, x, y, player):
+        board_active = self._small_active[board_x][board_y]
+        board = self._small_boards[board_x][board_y]
+        if self._active and board_active:
+            if board.make_move(x, y, player):
+                self.fields[board_x][board_y] = self.board.check_winner(x, y)
+                self.check_winner(x, y)
+                self.activate_boards(x, y)
+
+    def activate_boards(self, x, y):
+        if self._small_boards[x][y].active is True:
+            for i in range(self._size):
+                for j in range(self._size):
+                    self._small_active[i][j] = False
+            self._small_active[x][y] = True
+        else:
+            for i in range(self._size):
+                for j in range(self._size):
+                    self._small_active[i][j] = True
 
 
 class SmallBoard(Board):
-    pass
+    def __init__(self, big, size=3):
+        super().__init__(size)
+        self._big_board = big
+
+    def make_move(self, x, y, player):
+        if not (self._active and self.fields[x][y] is None):
+            return False
+        self.fields[x][y] = player
+        self.check_winner()
+        return True
