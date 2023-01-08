@@ -37,7 +37,8 @@ class Board:
 
     def check_winner(self):
         def winner_state(fields):
-            if len(set(fields)) == 1 and (None, "tie") not in fields:
+            if (len(set(fields)) == 1 and None not in fields
+                    and "tie" not in fields):
                 self._active = False
                 return True
             return False
