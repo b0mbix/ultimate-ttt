@@ -3,8 +3,11 @@ class SizeError(Exception):
 
 
 class Board:
-    """A sizeXsize board.
-        Values of fields: None or Player object"""
+    """
+    A sizeXsize board, a parent for SmallBoard and BigBoard classes.
+    Optional arguments:
+    size:   odd integer not less than 3, width and height of the board.
+    """
 
     def __init__(self, size=3):
         self._active = True
@@ -71,13 +74,19 @@ class Board:
 
 
 class BigBoard(Board):
+    """
+    A sizeXsize big board.
+    Contains both final fields and small boards with information about them.
+    Optional arguments:
+    size:   odd integer not less than 3, width and height of the board.
+    """
     def __init__(self, size=3):
         super().__init__(size)
         self._small_boards = []
-        self._active_small = []
+        self._small_active = []
         for i in range(size):
             self._small_boards.append([])
-            self._active_small.append([])
+            self._small_active.append([])
             for _ in range(size):
                 self._small_boards[i].append(SmallBoard(self, size))
                 self._small_active[i].append(True)
@@ -104,6 +113,12 @@ class BigBoard(Board):
 
 
 class SmallBoard(Board):
+    """
+    A sizeXsize small board.
+    Basically default board, but returns information if move was successful.
+    Optional arguments:
+    size:   odd integer not less than 3, width and height of the board.
+    """
     def __init__(self, big, size=3):
         super().__init__(size)
         self._big_board = big
