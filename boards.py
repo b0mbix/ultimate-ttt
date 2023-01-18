@@ -104,7 +104,6 @@ class BigBoard(Board):
         self.fields[board_x][board_y] = board.check_winner()
         self.check_winner()
         self.activate_boards(x, y)
-        return True
 
     def activate_boards(self, x, y):
         if self._small_boards[x][y].active is True:

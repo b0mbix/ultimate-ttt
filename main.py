@@ -1,11 +1,13 @@
 from boards import BigBoard
 from errors import SizeError, RangeError, ActiveError, PlaceError, ModeError
 import os
+import random
 
 
 FIELDS_EMPTY = "[ ]"
 FIELDS_X = "[X]"
 FIELDS_O = "[O]"
+BOT = "O"
 
 
 def clear():
@@ -16,12 +18,21 @@ class Game:
     """Class responsible for game and interface"""
     def __init__(self):
         self._players = ['X', 'O']
+        random.shuffle(self._players)
         clear()
         print("Welcome to Ultimate Tic-Tac-Toe!\n")
         self.get_size()
         self.get_mode()
         while self._game.active:
-            self.next_move()
+            if self._players[0] == BOT:
+                if self._mode == 1:
+                    self.next_move()
+                if self._mode == 2:
+                    self.random_bot()
+                if self._mode == 3:
+                    self.smart_bot()
+            else:
+                self.next_move()
         self.generate_board()
         self.generate_endgame()
 
@@ -39,8 +50,8 @@ class Game:
             input("Press Enter to continue...")
             return None
         try:
-            if self._game.make_move(rsq, csq, rpos, cpos, self._players[0]):
-                self._players.reverse()
+            self._game.make_move(rsq, csq, rpos, cpos, self._players[0])
+            self._players.reverse()
         except RangeError:
             print("Incorrect move, one or more values are out of range.")
             input("Press Enter to continue...")
@@ -48,7 +59,7 @@ class Game:
             print("This board is not active.")
             input("Press Enter to continue...")
         except PlaceError:
-            print("This place is already taken.")
+            print("This place is taken or game on this board has ended.")
             input("Press Enter to continue...")
 
     def get_size(self, next_time=0):
@@ -69,12 +80,12 @@ class Game:
         if not next_time:
             print("Available modes:")
             print("1. Player vs Player")
-            print("2. Player vs random AI (not available yet)")
+            print("2. Player vs random AI")
             print('3. Player vs "smart" AI (not available yet)')
-        possible = [1]
+        possible = [1, 2]
         try:
-            mode = int(input("Enter mode: "))
-            if mode not in possible:
+            self._mode = int(input("Enter mode: "))
+            if self._mode not in possible:
                 raise ModeError
         except ModeError:
             print("Incorrect mode!")
@@ -133,6 +144,24 @@ class Game:
             print("Tie!")
         else:
             print(f"{winner} won the game!")
+
+    def random_bot(self):
+        size = self._size
+        if self._game.which_active() == "all":
+            rsq = random.randint(0, size-1)
+            csq = random.randint(0, size-1)
+        else:
+            rsq, csq = self._game.which_active()
+        rpos = random.randint(0, size-1)
+        cpos = random.randint(0, size-1)
+        try:
+            self._game.make_move(rsq, csq, rpos, cpos, self._players[0])
+            self._players.reverse()
+        except PlaceError:
+            self.random_bot()
+
+    def smart_bot(self):
+        pass
 
 
 def main():
