@@ -1,16 +1,11 @@
 from boards import BigBoard
-from boards import SizeError, RangeError, ActiveError, PlaceError
+from errors import SizeError, RangeError, ActiveError, PlaceError, ModeError
 import os
-import time
 
 
 FIELDS_EMPTY = "[ ]"
 FIELDS_X = "[X]"
 FIELDS_O = "[O]"
-
-
-class ModeError(Exception):
-    pass
 
 
 def clear():
@@ -41,20 +36,20 @@ class Game:
             cpos = int(input("Enter column position (second number in columns): "))-1     # noqa: E501
         except ValueError:
             print("You have to give a number!")
-            time.sleep(2)
+            input("Press Enter to continue...")
             return None
         try:
             if self._game.make_move(rsq, csq, rpos, cpos, self._players[0]):
                 self._players.reverse()
         except RangeError:
-            print("Incorrect move, one or more values are out of range")
-            time.sleep(2)
+            print("Incorrect move, one or more values are out of range.")
+            input("Press Enter to continue...")
         except ActiveError:
-            print("This board is not active")
-            time.sleep(2)
+            print("This board is not active.")
+            input("Press Enter to continue...")
         except PlaceError:
-            print("This place is already taken")
-            time.sleep(2)
+            print("This place is already taken.")
+            input("Press Enter to continue...")
 
     def get_size(self, next_time=0):
         if not next_time:
