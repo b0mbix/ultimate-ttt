@@ -2,6 +2,18 @@ class SizeError(Exception):
     pass
 
 
+class RangeError(Exception):
+    pass
+
+
+class ActiveError(Exception):
+    pass
+
+
+class PlaceError(Exception):
+    pass
+
+
 class Board:
     """
     A sizeXsize board, a parent for SmallBoard and BigBoard classes.
@@ -92,13 +104,20 @@ class BigBoard(Board):
                 self._small_active[i].append(True)
 
     def make_move(self, board_x, board_y, x, y, player):
+        size = self._size
+        if (board_x not in range(size) or board_y not in range(size)
+           or x not in range(size) or y not in range(size)):
+            raise RangeError("Incorrect arguments")
         board_active = self._small_active[board_x][board_y]
         board = self._small_boards[board_x][board_y]
-        if self._active and board_active:
-            if board.make_move(x, y, player):
-                self.fields[board_x][board_y] = self.board.check_winner(x, y)
-                self.check_winner(x, y)
-                self.activate_boards(x, y)
+        if not (self._active and board_active):
+            raise ActiveError("This board is not active")
+        if not board.make_move(x, y, player):
+            raise PlaceError("This place is already occupied")
+        self.fields[board_x][board_y] = board.check_winner()
+        self.check_winner()
+        self.activate_boards(x, y)
+        return True
 
     def activate_boards(self, x, y):
         if self._small_boards[x][y].active is True:
@@ -110,6 +129,23 @@ class BigBoard(Board):
             for i in range(self._size):
                 for j in range(self._size):
                     self._small_active[i][j] = True
+
+    def get_small_value(self, sx, sy, x, y):
+        return self._small_boards[sx][sy].fields[x][y]
+
+    def which_active(self):
+        count = 0
+        x = 0
+        y = 0
+        for i in range(self._size):
+            for j in range(self._size):
+                if self._small_active[i][j]:
+                    count += 1
+                    x = i
+                    y = j
+                if count > 1:
+                    return "all"
+        return (x, y)
 
 
 class SmallBoard(Board):

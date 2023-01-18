@@ -1,6 +1,7 @@
-from boards import Board, BigBoard, SmallBoard
-from boards import SizeError
+from boards import BigBoard
+from boards import SizeError, RangeError, ActiveError, PlaceError
 import os
+import time
 
 
 FIELDS_EMPTY = "[ ]"
@@ -17,12 +18,43 @@ def clear():
 
 
 class Game:
+    """Class responsible for game and interface"""
     def __init__(self):
+        self._players = ['X', 'O']
         clear()
         print("Welcome to Ultimate Tic-Tac-Toe!\n")
         self.get_size()
         self.get_mode()
-        self.generate_ui()
+        while self._game.active:
+            self.next_move()
+        self.generate_board()
+        self.generate_endgame()
+
+    def next_move(self):
+        self.generate_board()
+        self.generate_active()
+        print(f"{self._players[0]} move!")
+        try:
+            rsq = int(input("Enter row square (first number in rows): "))-1
+            csq = int(input("Enter column square (first number in columns): "))-1       # noqa: E501
+            rpos = int(input("Enter row position (second number in rows): "))-1
+            cpos = int(input("Enter column position (second number in columns): "))-1     # noqa: E501
+        except ValueError:
+            print("You have to give a number!")
+            time.sleep(2)
+            return None
+        try:
+            if self._game.make_move(rsq, csq, rpos, cpos, self._players[0]):
+                self._players.reverse()
+        except RangeError:
+            print("Incorrect move, one or more values are out of range")
+            time.sleep(2)
+        except ActiveError:
+            print("This board is not active")
+            time.sleep(2)
+        except PlaceError:
+            print("This place is already taken")
+            time.sleep(2)
 
     def get_size(self, next_time=0):
         if not next_time:
@@ -33,6 +65,9 @@ class Game:
         except SizeError:
             print("Incorrect board size!")
             print("Mind that size has to be and odd number not less than 3.")
+            self.get_size(1)
+        except ValueError:
+            print("You have to give a number.")
             self.get_size(1)
 
     def get_mode(self, next_time=0):
@@ -49,8 +84,11 @@ class Game:
         except ModeError:
             print("Incorrect mode!")
             self.get_mode(1)
+        except ValueError:
+            print("You have to give a number.")
+            self.get_mode(1)
 
-    def generate_ui(self):
+    def generate_board(self):
         size = self._size
         clear()
         print("   ", end="")
@@ -67,14 +105,39 @@ class Game:
                 print("      "+'-'*(6*size**2+size-1+3*(size-2)))
         print("\n")
 
+    def generate_active(self):
+        if self._game.which_active() == "all":
+            print("All boards are active.")
+        else:
+            x, y = self._game.which_active()
+            print(f"Active board: {x+1} row, {y+1} column")
+
     def generate_row(self, rsq, rpos):
         size = self._size
         print(f"{rsq}.{rpos}", end="")
-        for i in range(size):
-            for j in range(size):
-                print(f"   {FIELDS_EMPTY}", end="")
-            if size-i-1:
+        rsq -= 1
+        rpos -= 1
+        for csq in range(size):
+            for cpos in range(size):
+                print(f"   {self.get_field(rsq, csq, rpos, cpos)}", end="")
+            if size-csq-1:
                 print("   |", end="")
+
+    def get_field(self, rs, cs, rp, cp):
+        val = self._game.get_small_value(rs, cs, rp, cp)
+        if not val:
+            return FIELDS_EMPTY
+        if val == "X":
+            return FIELDS_X
+        return FIELDS_O
+
+    def generate_endgame(self):
+        print("GAME OVER")
+        winner = self._game.check_winner()
+        if winner == 'tie':
+            print("Tie!")
+        else:
+            print(f"{winner} won the game!")
 
 
 def main():
