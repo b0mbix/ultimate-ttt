@@ -1,4 +1,5 @@
 from boards import BigBoard
+from bots import RandomBot, SmartBot
 from errors import SizeError, RangeError, ActiveError, PlaceError, ModeError
 import os
 import random
@@ -14,23 +15,21 @@ def clear():
     os.system("clear")
 
 
-class Game:
+class Gameplay:
     """Class responsible for game and interface"""
     def __init__(self):
-        self._players = ['X', 'O']
-        random.shuffle(self._players)
+        self.players = ['X', 'O']
+        random.shuffle(self.players)
         clear()
         print("Welcome to Ultimate Tic-Tac-Toe!\n")
         self.get_size()
         self.get_mode()
-        while self._game.active:
-            if self._players[0] == BOT:
+        while self.game.active:
+            if self.players[0] == BOT:
                 if self._mode == 1:
                     self.next_move()
-                if self._mode == 2:
-                    self.random_bot()
-                if self._mode == 3:
-                    self.smart_bot()
+                if self._mode in [2, 3]:
+                    self._bot.make_move()
             else:
                 self.next_move()
         self.generate_board()
@@ -39,7 +38,7 @@ class Game:
     def next_move(self):
         self.generate_board()
         self.generate_active()
-        print(f"{self._players[0]} move!")
+        print(f"{self.players[0]} move!")
         try:
             rsq = int(input("Enter row square (first number in rows): "))-1
             csq = int(input("Enter column square (first number in columns): "))-1       # noqa: E501
@@ -50,8 +49,8 @@ class Game:
             input("Press Enter to continue...")
             return None
         try:
-            self._game.make_move(rsq, csq, rpos, cpos, self._players[0])
-            self._players.reverse()
+            self.game.make_move(rsq, csq, rpos, cpos, self.players[0])
+            self.players.reverse()
         except RangeError:
             print("Incorrect move, one or more values are out of range.")
             input("Press Enter to continue...")
@@ -67,7 +66,7 @@ class Game:
             print("Default board size is 3, other sizes are not recommended.")
         try:
             self._size = int(input("Enter board size: "))
-            self._game = BigBoard(self._size)
+            self.game = BigBoard(self._size)
         except SizeError:
             print("Incorrect board size!")
             print("Mind that size has to be and odd number not less than 3.")
@@ -87,6 +86,10 @@ class Game:
             self._mode = int(input("Enter mode: "))
             if self._mode not in possible:
                 raise ModeError
+            if self._mode == 2:
+                self._bot = RandomBot(self, self._size)
+            if self._mode == 3:
+                self._bot = SmartBot(self, self._size)
         except ModeError:
             print("Incorrect mode!")
             self.get_mode(1)
@@ -112,10 +115,10 @@ class Game:
         print("\n")
 
     def generate_active(self):
-        if self._game.which_active() == "all":
+        if self.game.which_active() == "all":
             print("All boards are active.")
         else:
-            x, y = self._game.which_active()
+            x, y = self.game.which_active()
             print(f"Active board: {x+1} row, {y+1} column")
 
     def generate_row(self, rsq, rpos):
@@ -130,7 +133,7 @@ class Game:
                 print("   |", end="")
 
     def get_field(self, rs, cs, rp, cp):
-        val = self._game.get_small_value(rs, cs, rp, cp)
+        val = self.game.get_small_value(rs, cs, rp, cp)
         if not val:
             return FIELDS_EMPTY
         if val == "X":
@@ -139,33 +142,15 @@ class Game:
 
     def generate_endgame(self):
         print("GAME OVER")
-        winner = self._game.check_winner()
+        winner = self.game.check_winner()
         if winner == 'tie':
             print("Tie!")
         else:
             print(f"{winner} won the game!")
 
-    def random_bot(self):
-        size = self._size
-        if self._game.which_active() == "all":
-            rsq = random.randint(0, size-1)
-            csq = random.randint(0, size-1)
-        else:
-            rsq, csq = self._game.which_active()
-        rpos = random.randint(0, size-1)
-        cpos = random.randint(0, size-1)
-        try:
-            self._game.make_move(rsq, csq, rpos, cpos, self._players[0])
-            self._players.reverse()
-        except PlaceError:
-            self.random_bot()
-
-    def smart_bot(self):
-        pass
-
 
 def main():
-    Game()
+    Gameplay()
 
 
 if __name__ == "__main__":
