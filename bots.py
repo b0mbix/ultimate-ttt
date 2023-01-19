@@ -28,7 +28,7 @@ class RandomBot:
             self.make_move()
 
 
-class SmartBot(RandomBot):
+class SmartBot:
     """Bot making moves for Ultimate-Tic-Tac-Toe game based on algorithm
     Arguments:
     game:   gameplay object with players and access to board methods
