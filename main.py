@@ -12,7 +12,12 @@ BOT = "O"
 
 
 def clear():
-    os.system("clear")
+    name = os.name
+
+    if name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 
 class Gameplay:
