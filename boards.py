@@ -80,13 +80,13 @@ class BigBoard(Board):
     """
     def __init__(self, size=3):
         super().__init__(size)
-        self._small_boards = []
+        self.small_boards = []
         self._small_active = []
         for i in range(size):
-            self._small_boards.append([])
+            self.small_boards.append([])
             self._small_active.append([])
             for _ in range(size):
-                self._small_boards[i].append(SmallBoard(size))
+                self.small_boards[i].append(SmallBoard(size))
                 self._small_active[i].append(True)
 
     def make_move(self, board_x, board_y, x, y, player):
@@ -99,7 +99,7 @@ class BigBoard(Board):
            or x not in range(size) or y not in range(size)):
             raise RangeError("Incorrect arguments")
         board_active = self._small_active[board_x][board_y]
-        board = self._small_boards[board_x][board_y]
+        board = self.small_boards[board_x][board_y]
         if not (self._active and board_active):
             raise ActiveError("This board is not active")
         if not board.make_move(x, y, player):
@@ -110,7 +110,7 @@ class BigBoard(Board):
 
     def activate_boards(self, x, y):
         """Activates boards based on previous move."""
-        if self._small_boards[x][y].active is True:
+        if self.small_boards[x][y].active is True:
             for i in range(self._size):
                 for j in range(self._size):
                     self._small_active[i][j] = False
@@ -122,7 +122,7 @@ class BigBoard(Board):
 
     def get_small_value(self, sx, sy, x, y):
         """Gets value of a field on a small board."""
-        return self._small_boards[sx][sy].fields[x][y]
+        return self.small_boards[sx][sy].fields[x][y]
 
     def which_active(self):
         """Returns information about active boards (includes finished boards).

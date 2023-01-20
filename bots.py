@@ -43,7 +43,7 @@ class SmartBot:
     def __init__(self, game, size=3):
         self._gameplay = game
         self._size = size
-        self._board = game.game._small_boards
+        self._board = game.game.small_boards
 
     def make_move(self):
         """Makes move on the board."""
@@ -181,7 +181,7 @@ class SmartBot:
         """Tells if enemy could make move in any board by making this move.
         Called only by bot.
         """
-        return not (self._gameplay.game._small_active[field[2]][field[3]])
+        return not (self._gameplay.game.small_boards[field[2]][field[3]].active)    # NOQA: E501
 
     def winner_state(self, fields):
         """Tells whether game on this board has ended or not."""
