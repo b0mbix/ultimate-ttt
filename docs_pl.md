@@ -25,11 +25,10 @@ Klasa w pliku `bots.py`, której obiekt jest botem wykonującym kompletnie losow
 Klasa w pliku `bots.py`, której obiekt wykonuje ruch na podstawie następującego algorytmu:
 1. Wczytaj listę pól, na których wykonanie ruchu jest możliwe
 2. Jeżeli wybierając któreś pole możesz wygrać grę, wybierz je - **KONIEC**
-3. Jeżeli przeciwnik może wygrać grę w następnym ruchu po wyborze tego pola, usuń je z możliwych
-4. Jeżeli wybierając któreś pole możesz wygrać planszę, wybierz je - **KONIEC**
-5. Jeżeli przeciwnik może wygrać planszę w następnym ruchu po wyborze tego pola, usuń je z możliwych
-6. Jeżeli przeciwnik może wybrać pole na dowolnej planszy po wyborze tego pola, usuń je z możliwych
-7. Wylosuj ruch z dostępnych pól <- jeżeli nie ma takich dodaj do puli pola ostanio usunięte (kolejno w 6, 4, i 3 kroku) - **KONIEC**
+3. Jeżeli wybierając któreś pole możesz wygrać planszę, wybierz je - **KONIEC**
+4. Jeżeli przeciwnik może wygrać planszę w następnym ruchu po wyborze tego pola, usuń je z możliwych
+5. Jeżeli przeciwnik może wybrać pole na dowolnej planszy po wyborze tego pola, usuń je z możliwych
+6. Wylosuj ruch z dostępnych pól <- jeżeli nie ma takich dodaj do puli pola ostanio usunięte (kolejno w 6, 4, i 3 kroku) - **KONIEC**
 ### Gameplay
 Klasa w pliku `main.py` komunikująca się z logiką i wypisującą interfejs. Do ważniejszych funkcji należą:
 - `get_size` i `get_mode` - funkcje pobierające rozmiar i tryb gry

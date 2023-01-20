@@ -86,7 +86,7 @@ class BigBoard(Board):
             self._small_boards.append([])
             self._small_active.append([])
             for _ in range(size):
-                self._small_boards[i].append(SmallBoard(self, size))
+                self._small_boards[i].append(SmallBoard(size))
                 self._small_active[i].append(True)
 
     def make_move(self, board_x, board_y, x, y, player):

@@ -1,6 +1,3 @@
 .vscode
+.pytest_cache
 __pycache__
-img
-ui
-ui_py
-main_oneboard.py

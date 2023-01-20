@@ -90,8 +90,8 @@ class Gameplay:
             print("Available modes:")
             print("1. Player vs Player")
             print("2. Player vs random AI")
-            print('3. Player vs "smart" AI (not available yet)')
-        possible = [1, 2]
+            print('3. Player vs "smart" AI (not recommended for size>7)')
+        possible = [1, 2, 3]
         try:
             self._mode = int(input("Enter mode: "))
             if self._mode not in possible:
