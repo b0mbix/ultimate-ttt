@@ -167,7 +167,6 @@ class SmartBot:
         Called only by bot.
         """
         size = self._size
-        # nojman jeśli to czytasz nie bij pls
         if self.make_all(field):
             for i in range(size):
                 for j in range(size):
