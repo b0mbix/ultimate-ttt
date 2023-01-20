@@ -3,15 +3,17 @@ import random
 
 
 class RandomBot:
-    """Bot making random moves for Ultimate-Tic-Tac-Toe game
-    Arguments:
-    game:   gameplay object with players and access to board methods
-    size:   (default=3) size of the board"""
+    """Bot making random moves for Ultimate-Tic-Tac-Toe game.
+
+    Args:
+        game (Gameplay): gameplay object.
+        size (int, optional): size of the board. Defaults to 3."""
     def __init__(self, game, size=3):
         self._gameplay = game
         self._size = size
 
     def make_move(self):
+        """Makes move on the board."""
         size = self._size
         if self._gameplay.game.which_active() == "all":
             rsq = random.randint(0, size-1)
@@ -29,16 +31,19 @@ class RandomBot:
 
 
 class SmartBot:
-    """Bot making moves for Ultimate-Tic-Tac-Toe game based on algorithm
-    Arguments:
-    game:   gameplay object with players and access to board methods
-    size:   (default=3) size of the board"""
+    """Bot making moves for Ultimate-Tic-Tac-Toe game.
+    Moves are based on the algorithm specified in documentation.
+
+    Args:
+        game (Gameplay): gameplay object.
+        size (int, optional): size of the board. Defaults to 3."""
     def __init__(self, game, size=3):
         self._gameplay = game
         self._size = size
         self._board = game.game._small_boards
 
     def make_move(self):
+        """Makes move on the board."""
         size = self._size
         squares = []
         possible_phase1 = []    # all possible fields
@@ -107,16 +112,21 @@ class SmartBot:
                                           self._gameplay.players[0])
 
     def win_game(self, field):
+        """Tells if game could be won by making this move."""
         pass
 
     def lose_game(self, field):
+        """Tells if game could be lost in next move by making this move."""
         pass
 
     def win_board(self, field):
+        """Tells if board could be won by making this move."""
         pass
 
     def lose_board(self, field):
+        """Tells if board could be lost in next move by making this move."""
         pass
 
     def make_all(self, field):
+        """Tells if enemy could make move in any board by making this move."""
         pass

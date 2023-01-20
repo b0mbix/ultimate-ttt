@@ -4,10 +4,10 @@ from errors import SizeError, RangeError, ActiveError, PlaceError
 class Board:
     """
     A sizeXsize board, a parent for SmallBoard and BigBoard classes.
-    Optional arguments:
-    size:   odd integer not less than 3, width and height of the board.
-    """
 
+    Args:
+            size (int, optional): size of the board. Defaults to 3.
+    """
     def __init__(self, size=3):
         self._active = True
         self._size = size
@@ -24,13 +24,8 @@ class Board:
 
     @property
     def active(self):
+        """Property returning value of self._active."""
         return self._active
-
-    def set_active(self, state):
-        if self.check_winner() is None:
-            self._active = state
-        else:
-            self._active = False
 
     def make_move(self, x, y, player):
         if self._active and self.fields[x][y] is None:
@@ -38,7 +33,10 @@ class Board:
             self.check_winner()
 
     def check_winner(self):
+        """Returns information who won this board;
+        returns None if game hasn't ended yet"""
         def winner_state(fields):
+            """Tells whether game on this board has ended or not."""
             if (len(set(fields)) == 1 and None not in fields
                     and "tie" not in fields):
                 self._active = False
@@ -76,8 +74,9 @@ class BigBoard(Board):
     """
     A sizeXsize big board.
     Contains both final fields and small boards with information about them.
-    Optional arguments:
-    size:   odd integer not less than 3, width and height of the board.
+
+    Args:
+            size (int, optional): _description_. Defaults to 3.
     """
     def __init__(self, size=3):
         super().__init__(size)
@@ -91,6 +90,10 @@ class BigBoard(Board):
                 self._small_active[i].append(True)
 
     def make_move(self, board_x, board_y, x, y, player):
+        """Processes move making on a board;
+        sends make move information to SmallBoard object,
+        adds player move on big board if game on small board has ended.
+        """
         size = self._size
         if (board_x not in range(size) or board_y not in range(size)
            or x not in range(size) or y not in range(size)):
@@ -106,6 +109,7 @@ class BigBoard(Board):
         self.activate_boards(x, y)
 
     def activate_boards(self, x, y):
+        """Activates boards based on previous move."""
         if self._small_boards[x][y].active is True:
             for i in range(self._size):
                 for j in range(self._size):
@@ -117,9 +121,12 @@ class BigBoard(Board):
                     self._small_active[i][j] = True
 
     def get_small_value(self, sx, sy, x, y):
+        """Gets value of a field on a small board."""
         return self._small_boards[sx][sy].fields[x][y]
 
     def which_active(self):
+        """Returns information about active boards (includes finished boards).
+        """
         count = 0
         x = 0
         y = 0
@@ -136,16 +143,19 @@ class BigBoard(Board):
 
 class SmallBoard(Board):
     """
-    A sizeXsize small board.
+    A sizeXsize small board inheriting from Board class.
     Basically default board, but returns information if move was successful.
-    Optional arguments:
-    size:   odd integer not less than 3, width and height of the board.
+
+    Args:
+            size (int, optional): Size of the board. Defaults to 3.
     """
-    def __init__(self, big, size=3):
+    def __init__(self, size=3):
         super().__init__(size)
-        self._big_board = big
 
     def make_move(self, x, y, player):
+        """Makes move on small board;
+        returns information if move was successful.
+        """
         if not (self._active and self.fields[x][y] is None):
             return False
         self.fields[x][y] = player

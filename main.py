@@ -21,8 +21,9 @@ def clear():
 
 
 class Gameplay:
-    """Class responsible for game and interface"""
+    """Class responsible for game and interface; takes no arguments."""
     def __init__(self):
+        """Goes through whole process of gameplay; takes no arguments."""
         self.players = ['X', 'O']
         random.shuffle(self.players)
         clear()
@@ -41,6 +42,8 @@ class Gameplay:
         self.generate_endgame()
 
     def next_move(self):
+        """Takes information about next move from player, makes this move.
+        Handles exceptions thrown by BigBoard class."""
         self.generate_board()
         self.generate_active()
         print(f"{self.players[0]} move!")
@@ -67,6 +70,7 @@ class Gameplay:
             input("Press Enter to continue...")
 
     def get_size(self, next_time=0):
+        """Gets board size from player and validates it."""
         if not next_time:
             print("Default board size is 3, other sizes are not recommended.")
         try:
@@ -81,6 +85,7 @@ class Gameplay:
             self.get_size(1)
 
     def get_mode(self, next_time=0):
+        """Gets mode from player and validates it."""
         if not next_time:
             print("Available modes:")
             print("1. Player vs Player")
@@ -103,6 +108,7 @@ class Gameplay:
             self.get_mode(1)
 
     def generate_board(self):
+        """Prints board."""
         size = self._size
         clear()
         print("   ", end="")
@@ -120,6 +126,7 @@ class Gameplay:
         print("\n")
 
     def generate_active(self):
+        """Prints information about active board."""
         if self.game.which_active() == "all":
             print("All boards are active.")
         else:
@@ -127,6 +134,7 @@ class Gameplay:
             print(f"Active board: {x+1} row, {y+1} column")
 
     def generate_row(self, rsq, rpos):
+        """Prints row of board; used by generate_board()"""
         size = self._size
         print(f"{rsq}.{rpos}", end="")
         rsq -= 1
@@ -138,6 +146,7 @@ class Gameplay:
                 print("   |", end="")
 
     def get_field(self, rs, cs, rp, cp):
+        """Gets value of field to print; used by generate_row"""
         val = self.game.get_small_value(rs, cs, rp, cp)
         if not val:
             return FIELDS_EMPTY
@@ -146,6 +155,8 @@ class Gameplay:
         return FIELDS_O
 
     def generate_endgame(self):
+        """Prints information about end of the game;
+        gives information about winner."""
         print("GAME OVER")
         winner = self.game.check_winner()
         if winner == 'tie':
